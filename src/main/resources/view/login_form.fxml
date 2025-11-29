@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.controller.LoginFormController"
+            style="-fx-background-color: #1A1D29;"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <!-- Login Card -->
+    <VBox alignment="CENTER" layoutX="250.0" layoutY="150.0"
+          prefHeight="300.0" prefWidth="300.0"
+          spacing="20.0"
+          style="-fx-background-color: #252936; -fx-background-radius: 10;">
+
+        <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+        </padding>
+
+        <!-- Title -->
+        <Label text="Clothify Store" textFill="#5BA3F5">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <Label text="Login to your account" textFill="#9CA3AF">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+
+        <!-- Username Field -->
+        <VBox spacing="8.0">
+            <Label text="Username" textFill="#E8EAED">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="txtUsername" promptText="Enter username"
+                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;
+                              -fx-padding: 10;"/>
+        </VBox>
+
+        <!-- Password Field -->
+        <VBox spacing="8.0">
+            <Label text="Password" textFill="#E8EAED">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Label>
+            <PasswordField fx:id="txtPassword" promptText="Enter password"
+                           style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                                  -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;
+                                  -fx-padding: 10;"/>
+        </VBox>
+
+        <!-- Login Button -->
+        <Button fx:id="btnLogin" onAction="#handleLogin"
+                text="Login" maxWidth="Infinity"
+                style="-fx-background-color: #5BA3F5; -fx-text-fill: white;
+                       -fx-background-radius: 5; -fx-font-size: 14px;
+                       -fx-font-weight: bold; -fx-cursor: hand;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+            </padding>
+        </Button>
+
+        <!-- Error Label -->
+        <Label fx:id="lblError" textFill="#F87171" visible="false">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </Label>
+
+    </VBox>
+
+</AnchorPane>
