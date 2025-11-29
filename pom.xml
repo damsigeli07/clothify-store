@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
     <dependencies>
         <!-- JavaFX Controls -->
         <dependency>
@@ -89,7 +90,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version> <!-- Changed from 3.17.0 -->
+            <version>3.14.0</version>
         </dependency>
 
         <!-- Apache Commons Codec -->
