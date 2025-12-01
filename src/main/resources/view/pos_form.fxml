@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #1A1D29;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.POSController">
+
+    <children>
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0" style="-fx-background-color: #1E2230;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+        </padding>
+        <children>
+            <Button mnemonicParsing="false" onAction="#backToDashboard" style="-fx-background-color: #5BA3F5; -fx-text-fill: white;" text="← Back">
+                <padding>
+                    <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+                </padding>
+            </Button>
+            <Label style="-fx-font-weight: bold; -fx-font-size: 20;" text="Point of Sale" textFill="#5ba3f5" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblDateTime" style="-fx-font-size: 14;" text="Date/Time" textFill="WHITE" />
+        </children>
+    </HBox>
+
+        <!-- Main Content -->
+        <HBox spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+
+            <!-- Left Panel - Product Selection -->
+            <VBox prefWidth="700.0" spacing="15.0" HBox.hgrow="ALWAYS">
+                <children>
+                <!-- Search Bar -->
+                <HBox spacing="10.0">
+                <children>
+                    <TextField fx:id="txtSearch" promptText="Search products..." style="-fx-background-color: #252936; -fx-text-fill: white;                                               -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;" HBox.hgrow="ALWAYS">
+                        <padding>
+                            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                        </padding>
+                    </TextField>
+                    <Button mnemonicParsing="false" onAction="#searchProducts" style="-fx-background-color: #5BA3F5; -fx-text-fill: white;" text="Search">
+                        <padding>
+                            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                        </padding>
+                    </Button>
+                </children>
+                </HBox>
+
+                    <!-- Products Table -->
+                    <TableView fx:id="tblProducts" style="-fx-background-color: #252936; -fx-control-inner-background: #252936;" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn prefWidth="60" text="ID">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="200" text="Name">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="120" text="Category">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="category" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="100" text="Price">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="price" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="80" text="Stock">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="quantity" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="130" text="Action">
+                                <cellFactory>
+                                    <javafx.scene.control.cell.PropertyValueFactory property="dummy" />
+                                </cellFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                </children>
+            </VBox>
+            <!-- Right Panel - Cart -->
+            <VBox prefWidth="450.0" spacing="15.0" style="-fx-background-color: #252936; -fx-background-radius: 10; -fx-padding: 20;">
+            <children>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Cart" textFill="#e8eaed" />
+
+                <!-- Cart Table -->
+                <TableView fx:id="tblCart" style="-fx-background-color: #1E2230; -fx-control-inner-background: #1E2230;" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn prefWidth="150" text="Product">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="60" text="Qty">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="quantity" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="80" text="Price">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="price" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="100" text="Total">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="total" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+
+                <!-- Customer Name -->
+                <VBox spacing="8.0">
+                    <children>
+                        <Label style="-fx-font-size: 12px;" text="Customer Name" textFill="#9CA3AF" />
+                        <TextField fx:id="txtCustomerName" promptText="Enter customer name" style="-fx-background-color: #1E2230; -fx-text-fill: white;                                               -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;">
+                            <padding>
+                                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                            </padding>
+                        </TextField>
+                    </children>
+                </VBox>
+                <!-- Total -->
+                <HBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #1E2230; -fx-background-radius: 5; -fx-padding: 15;">
+                    <children>
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Total:" textFill="#9CA3AF" />
+                    <Region HBox.hgrow="ALWAYS" />
+                        <Label id="lblTotal" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="\$0.00" textFill="#5ba3f5" />
+                    </children>
+                </HBox>
+
+                <!-- Buttons -->
+                <HBox spacing="10.0">
+                    <children>
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#clearCart" style="-fx-background-color: #F87171; -fx-text-fill: white; -fx-background-radius: 5;" text="Clear" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+                            </padding>
+                        </Button>
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#processPayment" style="-fx-background-color: #34D399; -fx-text-fill: white; -fx-background-radius: 5;" text="Complete Sale" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                </HBox>
+
+
+            </children>
+            </VBox>
+
+
+
+        </HBox>
+    </children>
+
+
+</AnchorPane>
