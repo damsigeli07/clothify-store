@@ -6,7 +6,7 @@
     <session-factory>
         <!-- Database Connection Settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clothify_db?createDatabaseIfNotExist = true</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clothify_db?createDatabaseIfNotExist=true</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
 
@@ -25,8 +25,7 @@
         <property name="hibernate.hikari.maximumPoolSize">20</property>
         <property name="hibernate.hikari.idleTimeout">300000</property>
 
-        <!-- Entity Mappings (add your entity classes here) -->
-        <!-- <mapping class="com.clothify.entity.Product"/> -->
-        <!-- <mapping class="com.clothify.entity.User"/> -->
+        <!-- Entity Mappings -->
+        <mapping class="entity.User"/>
     </session-factory>
 </hibernate-configuration>
