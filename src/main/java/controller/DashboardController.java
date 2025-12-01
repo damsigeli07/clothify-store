@@ -44,7 +44,20 @@ public class DashboardController {
 
     @FXML
     public void openPOS(ActionEvent event) {
-        showAlert("POS", "POS screen coming soon!");
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/pos_form.fxml"));
+            Parent root = loader.load();
+            Stage posStage = new Stage();
+            posStage.setTitle("Clothify Store - POS");
+            posStage.setScene(new Scene(root));
+            posStage.setMaximized(true);
+            posStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
