@@ -62,7 +62,38 @@ public class DashboardController {
 
     @FXML
     public void openProducts(ActionEvent event) {
-        showAlert("Products", "Products screen coming soon!");
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/products_form.fxml"));
+            Parent root = loader.load();
+            Stage productsStage = new Stage();
+            productsStage.setTitle("Clothify Store - Products");
+            productsStage.setScene(new Scene(root));
+            productsStage.setMaximized(true);
+            productsStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openReports(ActionEvent event) {
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/reports_form.fxml"));
+            Parent root = loader.load();
+            Stage reportsStage = new Stage();
+            reportsStage.setTitle("Clothify Store - Reports");
+            reportsStage.setScene(new Scene(root));
+            reportsStage.setMaximized(true);
+            reportsStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -83,11 +114,6 @@ public class DashboardController {
     @FXML
     public void openOrders(ActionEvent event) {
         showAlert("Orders", "Orders screen coming soon!");
-    }
-
-    @FXML
-    public void openReports(ActionEvent event) {
-        showAlert("Reports", "Reports screen coming soon!");
     }
 
     @FXML
