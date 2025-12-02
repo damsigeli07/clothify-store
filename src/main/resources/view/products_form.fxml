@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ProductsController"
+            style="-fx-background-color: #1A1D29;"
+            prefHeight="700.0" prefWidth="1200.0">
+
+
+    <children>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0"
+              style="-fx-background-color: #1E2230;"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            <children>
+                <Button mnemonicParsing="false" onAction="#backToDashboard"
+                        style="-fx-background-color: #5BA3F5; -fx-text-fill: white;"
+                        text="← Back">
+                    <padding>
+                        <Insets bottom="8.0" left="15.0" right="15.0" top="8.0"/>
+                    </padding>
+                </Button>
+                <Label style="-fx-font-weight: bold; -fx-font-size: 20;" text="Product Management" textFill="#5ba3f5"/>
+            </children>
+        </HBox>
+
+        <!-- Main Content -->
+        <HBox spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+              AnchorPane.topAnchor="80.0" AnchorPane.bottomAnchor="20.0">
+
+            <!-- Left Panel - Product Form -->
+            <VBox spacing="15.0" prefWidth="400.0"
+                  style="-fx-background-color: #252936; -fx-background-radius: 10; -fx-padding: 20;">
+                <children>
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                           text="Product Details" textFill="#e8eaed"/>
+
+                    <!-- Product Name -->
+                    <VBox spacing="8.0">
+                        <children>
+                            <Label text="Product Name *" textFill="#9CA3AF" style="-fx-font-size: 12px;"/>
+                            <TextField fx:id="txtName" promptText="Enter product name"
+                                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                                </padding>
+                            </TextField>
+                        </children>
+                    </VBox>
+
+                    <!-- Category -->
+                    <VBox spacing="8.0">
+                        <children>
+                            <Label text="Category *" textFill="#9CA3AF" style="-fx-font-size: 12px;"/>
+                            <ComboBox fx:id="cmbCategory" promptText="Select category"
+                                      style="-fx-background-color: #1E2230; -fx-background-radius: 5;"
+                                      maxWidth="Infinity">
+                            </ComboBox>
+                        </children>
+                    </VBox>
+
+                    <!-- Price -->
+                    <VBox spacing="8.0">
+                        <children>
+                            <Label text="Price *" textFill="#9CA3AF" style="-fx-font-size: 12px;"/>
+                            <TextField fx:id="txtPrice" promptText="0.00"
+                                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                                </padding>
+                            </TextField>
+                        </children>
+                    </VBox>
+
+                    <!-- Quantity -->
+                    <VBox spacing="8.0">
+                        <children>
+                            <Label text="Quantity *" textFill="#9CA3AF" style="-fx-font-size: 12px;"/>
+                            <TextField fx:id="txtQuantity" promptText="0"
+                                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                                </padding>
+                            </TextField>
+                        </children>
+                    </VBox>
+
+                    <!-- Supplier -->
+                    <VBox spacing="8.0">
+                        <children>
+                            <Label text="Supplier" textFill="#9CA3AF" style="-fx-font-size: 12px;"/>
+                            <TextField fx:id="txtSupplier" promptText="Enter supplier name"
+                                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                                </padding>
+                            </TextField>
+                        </children>
+                    </VBox>
+
+                    <!-- Buttons -->
+                    <HBox spacing="10.0">
+                        <children>
+                            <Button mnemonicParsing="false" onAction="#clearForm"
+                                    style="-fx-background-color: #F87171; -fx-text-fill: white; -fx-background-radius: 5;"
+                                    text="Clear" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                                <padding>
+                                    <Insets bottom="12.0" left="20.0" right="20.0" top="12.0"/>
+                                </padding>
+                            </Button>
+                            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveProduct"
+                                    style="-fx-background-color: #5BA3F5; -fx-text-fill: white; -fx-background-radius: 5;"
+                                    text="Add Product" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                                <padding>
+                                    <Insets bottom="12.0" left="20.0" right="20.0" top="12.0"/>
+                                </padding>
+                            </Button>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+
+            <!-- Right Panel - Product List -->
+            <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                <children>
+                    <!-- Search Bar -->
+                    <HBox spacing="10.0">
+                        <children>
+                            <TextField fx:id="txtSearch" promptText="Search products..."
+                                       style="-fx-background-color: #252936; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;"
+                                       HBox.hgrow="ALWAYS">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                                </padding>
+                            </TextField>
+                            <Button mnemonicParsing="false" onAction="#searchProducts"
+                                    style="-fx-background-color: #5BA3F5; -fx-text-fill: white;"
+                                    text="Search">
+                                <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                                </padding>
+                            </Button>
+                        </children>
+                    </HBox>
+
+                    <!-- Products Table -->
+                    <TableView fx:id="tblProducts" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #252936; -fx-control-inner-background: #252936;">
+                        <columns>
+                            <TableColumn text="ID" prefWidth="50">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Name" prefWidth="180">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="name"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Category" prefWidth="120">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="category"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Price" prefWidth="100">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="price"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Quantity" prefWidth="80">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="quantity"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Supplier" prefWidth="150">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="supplier"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Actions" prefWidth="120">
+                                <cellFactory>
+                                    <javafx.scene.control.cell.PropertyValueFactory property="dummy"/>
+                                </cellFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                </children>
+            </VBox>
+        </HBox>
+    </children>
+
+</AnchorPane>
