@@ -1,83 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.LoginFormController"
-            style="-fx-background-color: #1A1D29;"
-            prefHeight="600.0" prefWidth="800.0">
+<StackPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
 
-    <!-- Login Card -->
-    <VBox alignment="CENTER" layoutX="250.0" layoutY="150.0"
-          prefHeight="300.0" prefWidth="300.0"
-          spacing="20.0"
-          style="-fx-background-color: #252936; -fx-background-radius: 10;">
+    <!-- Background Pattern (Optional - you can add images here) -->
+    <VBox alignment="CENTER" spacing="0">
+        <children>
+            <!-- Animated Circles Background -->
+            <AnchorPane prefHeight="700.0" prefWidth="1100.0">
+                <children>
+           <ImageView fitHeight="700.0" fitWidth="1100.0" opacity="0.3" pickOnBounds="true">
+               <image>
+                   <Image url="@../img/login-bg.jpg" />
+               </image>
+           </ImageView>
+                    <!-- Circle 1 -->
+                    <Circle centerX="100" centerY="150" fill="radial-gradient(center 50% 50%, radius 100%, rgba(99,102,241,0.1), transparent)" radius="200" />
+                    <!-- Circle 2 -->
+                    <Circle centerX="900" centerY="500" fill="radial-gradient(center 50% 50%, radius 100%, rgba(139,92,246,0.1), transparent)" radius="250" />
 
-        <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
-        </padding>
+                <!-- Main Content -->
+                <HBox alignment="CENTER" spacing="50" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100" AnchorPane.topAnchor="100">
 
-        <!-- Title -->
-        <Label text="Clothify Store" textFill="#5BA3F5">
-            <font>
-                <Font name="System Bold" size="24.0"/>
-            </font>
-        </Label>
-
-        <Label text="Login to your account" textFill="#9CA3AF">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-
-        <!-- Username Field -->
-        <VBox spacing="8.0">
-            <Label text="Username" textFill="#E8EAED">
-                <font>
-                    <Font size="12.0"/>
-                </font>
-            </Label>
-            <TextField fx:id="txtUsername" promptText="Enter username"
-                       style="-fx-background-color: #1E2230; -fx-text-fill: white;
-                              -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;
-                              -fx-padding: 10;"/>
-        </VBox>
-
-        <!-- Password Field -->
-        <VBox spacing="8.0">
-            <Label text="Password" textFill="#E8EAED">
-                <font>
-                    <Font size="12.0"/>
-                </font>
-            </Label>
-            <PasswordField fx:id="txtPassword" promptText="Enter password"
-                           style="-fx-background-color: #1E2230; -fx-text-fill: white;
-                                  -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5;
-                                  -fx-padding: 10;"/>
-        </VBox>
-
-        <!-- Login Button -->
-        <Button fx:id="btnLogin" onAction="#handleLogin"
-                text="Login" maxWidth="Infinity"
-                style="-fx-background-color: #5BA3F5; -fx-text-fill: white;
-                       -fx-background-radius: 5; -fx-font-size: 14px;
-                       -fx-font-weight: bold; -fx-cursor: hand;">
-            <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
-            </padding>
-        </Button>
-
-        <!-- Error Label -->
-        <Label fx:id="lblError" textFill="#F87171" visible="false">
-            <font>
-                <Font size="12.0"/>
-            </font>
-        </Label>
-
+                <!-- Left Side - Branding -->
+                <VBox alignment="CENTER" prefWidth="450" spacing="30" style="-fx-background-size: 16;">
+                <children>
+                    <!-- Logo/Icon Placeholder -->
+                    <VBox alignment="CENTER" spacing="15">
+                           <children>
+                              <Label layoutX="221.0" layoutY="10.0" style="-fx-font-size: 48; -fx-font-weight: bold; -fx-line-spacing: 5;" text="Satine" textFill="#6366f1" />
+                              <Label text="Store Management System" textFill="#94a3b8" />
+                           </children>
+                    </VBox>
+                    <!-- Features List -->
+                    <VBox spacing="20" style="-fx-padding: 40 0 0 0;">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <children>
+                                    <Circle fill="#10B981" radius="8" />
+                                    <Label style="-fx-font-size: 14px;" text="Real-time Inventory Management" textFill="#F1F5F9" />
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <children>
+                                    <Circle fill="#10B981" radius="8" />
+                                    <Label style="-fx-font-size: 14px;" text="Advanced POS System" textFill="#F1F5F9" />
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <children>
+                                    <Circle fill="#10B981" radius="8" />
+                                    <Label style="-fx-font-size: 14px;" text="Comprehensive Reporting" textFill="#F1F5F9" />
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <children>
+                                    <Circle fill="#10B981" radius="8" />
+                                    <Label style="-fx-font-size: 14px;" text="Multi-user Support" textFill="#F1F5F9" />
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+                </VBox>
+                    <!-- Right Side - Login Form -->
+                    <VBox alignment="CENTER" prefWidth="450" spacing="25" style="-fx-background-color: rgba(30, 41, 59, 0.5);                                      -fx-background-radius: 25; -fx-padding: 50;                                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 30, 0, 0, 15);">
+                    <children>
+                    <!-- Form Header -->
+                    <VBox alignment="CENTER" spacing="8">
+                           <children>
+                              <Label text="Welcome Back!" textFill="#f1f5f9">
+                                 <font>
+                                    <Font name="System Bold" size="32.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Please login to continue" textFill="#94a3b8">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                    </VBox>
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="350.0" spacing="10.0" style="-fx-max-width: 350;">
+                           <children>
+                              <Label text="USERNAME" textFill="#94a3b8">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtUsername" promptText="Enter your username" style="-fx-background-color: #0F172A; -fx-font-size: 14; -fx-border-width: 1.5; -fx-border-radius: 12; -fx-border-color: #334155; -fx-background-radius: 12;" />
+                           </children>
+                        </VBox>
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="350.0" spacing="15.0" style="-fx-max-width: 350;">
+                           <children>
+                              <Label text="PASSWORD" textFill="#94a3b8">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                              <PasswordField fx:id="txtPassword" promptText="Enter your password" style="-fx-background-color: #0F172A; -fx-background-radius: 12; -fx-border-color: #334155; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-size: 14;" />
+                           </children>
+                        </VBox>
+                        <!-- Error Label -->
+                        <Label fx:id="lblError" maxWidth="350" textFill="#EF4444" visible="false" wrapText="true">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" style="-fx-max-width: 350; -fx-max-height: 50; -fx-background-radius: 12; -fx-cursor: hand; -fx-font-weight: bold; -fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6); -fx-font-size: 15;" text="LOGIN" textFill="WHITE">
+                           <effect>
+                              <DropShadow blurType="GAUSSIAN" height="31.0" offsetY="8.0" radius="15.0" width="31.0">
+                                 <color>
+                                    <Color red="0.05640000104904175" green="0.08585333079099655" blue="0.9399999976158142" opacity="0.5" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <!-- Default Credentials Info -->
+                        <VBox alignment="CENTER" spacing="5" style="-fx-padding: 20 0 0 0;">
+                            <children>
+                                <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Default Credentials" textFill="#64748B" />
+                                <Label style="-fx-font-size: 10px;" text="Username: admin | Password: admin123" textFill="#475569" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                </HBox>
+                </children>
+            </AnchorPane>
+        </children>
     </VBox>
 
-</AnchorPane>
+</StackPane>
