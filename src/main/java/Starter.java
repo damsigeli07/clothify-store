@@ -8,17 +8,15 @@ public class Starter extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Load FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login_form.fxml"));
         Parent root = loader.load();
 
-        // Create scene
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 1000, 700); // Set exact size
 
-        // Setup stage
-        primaryStage.setTitle("Clothify Store");
+        primaryStage.setTitle("Satine - Store Management");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(false); // Prevent resizing
+        primaryStage.centerOnScreen(); // Center the window
         primaryStage.show();
     }
 
