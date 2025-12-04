@@ -36,6 +36,8 @@ public class DatabaseInitializer {
                 System.out.println("   Password: admin123");
             } else {
                 System.out.println("✅ Admin user already exists");
+                System.out.println("   Username: admin");
+                System.out.println("   Password: admin123");
             }
 
             transaction.commit();
