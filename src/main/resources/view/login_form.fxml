@@ -78,7 +78,7 @@
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtUsername" promptText="Enter your username" style="-fx-background-color: #0F172A; -fx-font-size: 16; -fx-border-width: 1.5; -fx-border-radius: 12; -fx-border-color: #334155; -fx-background-radius: 12;" />
+                              <TextField fx:id="txtUsername" promptText="Enter your username" style="-fx-background-color: #0F172A; -fx-font-size: 16; -fx-border-width: 1.5; -fx-border-radius: 12; -fx-border-color: #334155; -fx-background-radius: 12; -fx-text-fill: white;" />
                            </children>
                         </VBox>
                         <VBox maxWidth="1.7976931348623157E308" prefHeight="83.0" prefWidth="299.0" spacing="15.0" style="-fx-max-width: 350;">
@@ -88,7 +88,7 @@
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="txtPassword" promptText="Enter your password" style="-fx-background-color: #0F172A; -fx-background-radius: 12; -fx-border-color: #334155; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-size: 16;" />
+                              <PasswordField fx:id="txtPassword" promptText="Enter your password" style="-fx-background-color: #0F172A; -fx-background-radius: 12; -fx-border-color: #334155; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-font-size: 16; -fx-text-fill: white;" />
                            </children>
                         </VBox>
                         <!-- Error Label -->
