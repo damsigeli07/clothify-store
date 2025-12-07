@@ -97,7 +97,7 @@
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="310.0" style="-fx-max-width: 350; -fx-max-height: 50; -fx-background-radius: 12; -fx-cursor: hand; -fx-font-weight: bold; -fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6); -fx-font-size: 18;" text="LOGIN" textFill="WHITE">
+                        <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="310.0" style="-fx-max-width: 350; -fx-max-height: 50; -fx-background-radius: 12; -fx-cursor: hand; -fx-font-weight: bold; -fx-background-color: linear-gradient(to right, #8B5CF6, #A78BFA); -fx-font-size: 18;" text="LOGIN" textFill="WHITE">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" height="31.0" offsetY="8.0" radius="15.0" width="31.0">
                                  <color>
