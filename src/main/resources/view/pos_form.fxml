@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #1A1D29;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.POSController">
 
@@ -149,11 +150,17 @@
                             <padding>
                                 <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
                             </padding>
+                        <font>
+                           <Font size="15.0" />
+                        </font>
                         </Button>
                         <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#processPayment" style="-fx-background-color: linear-gradient(to right, #10B981, #059669); -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Complete Sale" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
                             </padding>
+                        <font>
+                           <Font size="15.0" />
+                        </font>
                         </Button>
                     </children>
                 </HBox>
