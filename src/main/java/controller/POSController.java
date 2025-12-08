@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.OrderService;
 import service.ProductService;
@@ -35,16 +36,85 @@ public class POSController {
     @FXML
     public void initialize() {
         updateDateTime();
+        setupProductTable();
         loadProducts();
         setupCartTable();
 
         // Add "Add to Cart" button to each row
         addButtonToTable();
+
+        // Update datetime every second
+        startDateTimeUpdater();
+    }
+
+    private void setupProductTable() {
+        // Ensure columns are properly set up
+        TableColumn<ProductDto, Integer> idCol = (TableColumn<ProductDto, Integer>) tblProducts.getColumns().get(0);
+        TableColumn<ProductDto, String> nameCol = (TableColumn<ProductDto, String>) tblProducts.getColumns().get(1);
+        TableColumn<ProductDto, String> categoryCol = (TableColumn<ProductDto, String>) tblProducts.getColumns().get(2);
+        TableColumn<ProductDto, Double> priceCol = (TableColumn<ProductDto, Double>) tblProducts.getColumns().get(3);
+        TableColumn<ProductDto, Integer> stockCol = (TableColumn<ProductDto, Integer>) tblProducts.getColumns().get(4);
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        stockCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+        // Format price column
+        priceCol.setCellFactory(col -> new TableCell<ProductDto, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty || price == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", price));
+                }
+            }
+        });
+
+        // Color-code stock column
+        stockCol.setCellFactory(col -> new TableCell<ProductDto, Integer>() {
+            @Override
+            protected void updateItem(Integer stock, boolean empty) {
+                super.updateItem(stock, empty);
+                if (empty || stock == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(String.valueOf(stock));
+                    if (stock < 10) {
+                        setStyle("-fx-text-fill: #EF4444; -fx-font-weight: bold;"); // Red for low stock
+                    } else if (stock < 20) {
+                        setStyle("-fx-text-fill: #F59E0B;"); // Orange for medium stock
+                    } else {
+                        setStyle("-fx-text-fill: #10B981;"); // Green for high stock
+                    }
+                }
+            }
+        });
     }
 
     private void updateDateTime() {
-        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMMM d, yyyy - hh:mm a"));
         lblDateTime.setText(dateTime);
+    }
+
+    private void startDateTimeUpdater() {
+        // Update date/time every second
+        Thread thread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(1000);
+                    javafx.application.Platform.runLater(this::updateDateTime);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private void loadProducts() {
@@ -56,6 +126,42 @@ public class POSController {
 
     private void setupCartTable() {
         tblCart.setItems(cartItems);
+
+        // Setup cart table columns
+        TableColumn<CartItemDto, String> nameCol = (TableColumn<CartItemDto, String>) tblCart.getColumns().get(0);
+        TableColumn<CartItemDto, Integer> qtyCol = (TableColumn<CartItemDto, Integer>) tblCart.getColumns().get(1);
+        TableColumn<CartItemDto, Double> priceCol = (TableColumn<CartItemDto, Double>) tblCart.getColumns().get(2);
+        TableColumn<CartItemDto, Double> totalCol = (TableColumn<CartItemDto, Double>) tblCart.getColumns().get(3);
+
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        // Format price columns
+        priceCol.setCellFactory(col -> new TableCell<CartItemDto, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty || price == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", price));
+                }
+            }
+        });
+
+        totalCol.setCellFactory(col -> new TableCell<CartItemDto, Double>() {
+            @Override
+            protected void updateItem(Double total, boolean empty) {
+                super.updateItem(total, empty);
+                if (empty || total == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", total));
+                }
+            }
+        });
     }
 
     private void addButtonToTable() {
@@ -69,7 +175,9 @@ public class POSController {
                     ProductDto product = getTableView().getItems().get(getIndex());
                     addToCart(product);
                 });
-                btn.setStyle("-fx-background-color: #5BA3F5; -fx-text-fill: white;");
+                btn.setStyle("-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6); " +
+                        "-fx-text-fill: white; -fx-background-radius: 8; " +
+                        "-fx-font-weight: bold; -fx-cursor: hand;");
             }
 
             @Override
@@ -89,6 +197,10 @@ public class POSController {
         // Check if product already in cart
         for (CartItemDto item : cartItems) {
             if (item.getProductId().equals(product.getId())) {
+                if (item.getQuantity() >= product.getQuantity()) {
+                    showAlert("Not Enough Stock", "Only " + product.getQuantity() + " items available!");
+                    return;
+                }
                 item.setQuantity(item.getQuantity() + 1);
                 item.setTotal(item.getPrice() * item.getQuantity());
                 tblCart.refresh();
@@ -134,8 +246,19 @@ public class POSController {
 
     @FXML
     public void clearCart(ActionEvent event) {
-        cartItems.clear();
-        updateTotal();
+        if (cartItems.isEmpty()) {
+            return;
+        }
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Clear Cart");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Clear all items from cart?");
+
+        if (confirmAlert.showAndWait().get() == ButtonType.OK) {
+            cartItems.clear();
+            updateTotal();
+        }
     }
 
     @FXML
@@ -147,7 +270,8 @@ public class POSController {
 
         String customerName = txtCustomerName.getText().trim();
         if (customerName.isEmpty()) {
-            customerName = "Walk-in Customer";
+            showAlert("Customer Name Required", "Please enter customer name!");
+            return;
         }
 
         // Create order
@@ -165,14 +289,31 @@ public class POSController {
             productService.updateProduct(product);
         }
 
-        showAlert("Success", "Sale completed successfully!");
-        clearCart(null);
+        showAlert("Success", String.format("Sale completed!\nCustomer: %s\nTotal: $%.2f\n\nThank you for your purchase!",
+                customerName, total));
+        clearCartWithoutConfirmation();
         txtCustomerName.clear();
         loadProducts();
     }
 
+    private void clearCartWithoutConfirmation() {
+        cartItems.clear();
+        updateTotal();
+    }
+
     @FXML
     public void backToDashboard(ActionEvent event) {
+        if (!cartItems.isEmpty()) {
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirm");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("You have items in cart. Are you sure you want to go back?");
+
+            if (confirmAlert.showAndWait().get() != ButtonType.OK) {
+                return;
+            }
+        }
+
         try {
             Stage stage = (Stage) lblTotal.getScene().getWindow();
             stage.close();
@@ -180,7 +321,7 @@ public class POSController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard_form.fxml"));
             Parent root = loader.load();
             Stage dashboardStage = new Stage();
-            dashboardStage.setTitle("Clothify Store - Dashboard");
+            dashboardStage.setTitle("SATINE - Dashboard");
             dashboardStage.setScene(new Scene(root));
             dashboardStage.setMaximized(true);
             dashboardStage.show();
