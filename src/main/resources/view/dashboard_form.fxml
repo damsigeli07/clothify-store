@@ -80,7 +80,7 @@
                 <Label style="-fx-font-size: 28; -fx-font-weight: bold;" text="Dashboard Overview" textFill="#f1f5f9" />
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <VBox prefHeight="140.0" prefWidth="230.0" spacing="12.0" style="-fx-background-color: rgba(99, 102, 241, 0.15); -fx-background-radius: 15; -fx-padding: 25;" HBox.hgrow="ALWAYS">
+                        <VBox prefHeight="140.0" prefWidth="230.0" spacing="12.0" style="-fx-background-color: rgba(99, 102, 241, 0.15); -fx-background-radius: 15; -fx-padding: 25;">
                             <children>
                                 <Label style="-fx-font-size: 14px;" text="Total sales Today" textFill="#9ca3af" />
                                 <Label fx:id="lblTotalSales" style="-fx-font-size: 32; -fx-font-weight: bold;" text="\$2,450.00" textFill="#5ba3f5" />
