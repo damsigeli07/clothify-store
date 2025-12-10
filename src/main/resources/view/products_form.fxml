@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -54,11 +55,12 @@
                     <VBox spacing="8.0">
                         <children>
                             <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="CATEGORY *" textFill="#94A3B8" />
-                            <TextField id="cmbCategory" fx:id="txtName1" promptText="Select category" style="-fx-background-color: rgba(15, 23, 42, 0.8); -fx-text-fill: white;                             -fx-prompt-text-fill: #64748B; -fx-background-radius: 10;                             -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 10;                             -fx-border-width: 1.5;">
-                                <padding>
-                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                                </padding>
-                            </TextField>
+                     <ComboBox fx:id="cmbCategory" maxWidth="Infinity" prefHeight="45" prefWidth="150.0" promptText="Select category" style="-fx-background-color: rgba(15, 23, 42, 0.8);                          -fx-background-radius: 10; -fx-border-color: rgba(99, 102, 241, 0.3);                          -fx-border-radius: 10; -fx-border-width: 1.5;">
+                        <padding>
+                           <Insets bottom="7.0" left="10.0" right="10.0" top="7.0" />
+                        </padding>
+                     </ComboBox>
+
                         </children>
                     </VBox>
 
@@ -122,53 +124,42 @@
                     <!-- Search Bar -->
                     <HBox spacing="15.0">
                         <children>
-                            <TextField fx:id="txtSearch" promptText="Search products..."
-                                       style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-text-fill: white;
-                                              -fx-prompt-text-fill: #64748B; -fx-background-radius: 12;
-                                              -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 12;
-                                              -fx-border-width: 1.5; -fx-font-size: 14px;"
-                                       HBox.hgrow="ALWAYS">
+                            <TextField fx:id="txtSearch" promptText="Search products..." style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-text-fill: white;                                               -fx-prompt-text-fill: #64748B; -fx-background-radius: 12;                                               -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 12;                                               -fx-border-width: 1.5; -fx-font-size: 14px;" HBox.hgrow="ALWAYS">
                                 <padding>
-                                    <Insets bottom="12.0" left="20.0" right="20.0" top="12.0"/>
+                                    <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
                                 </padding>
                             </TextField>
-                            <Button mnemonicParsing="false" onAction="#searchProducts"
-                                    style="-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6);
-                                           -fx-text-fill: white; -fx-background-radius: 12; -fx-font-weight: bold;"
-                                    text="Search">
+                            <Button mnemonicParsing="false" onAction="#searchProducts" style="-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6);                                            -fx-text-fill: white; -fx-background-radius: 12; -fx-font-weight: bold;" text="Search">
                                 <padding>
-                                    <Insets bottom="12.0" left="25.0" right="25.0" top="12.0"/>
+                                    <Insets bottom="12.0" left="25.0" right="25.0" top="12.0" />
                                 </padding>
                             </Button>
                         </children>
                     </HBox>
 
                     <!-- Products Table -->
-                    <TableView fx:id="tblProducts" VBox.vgrow="ALWAYS"
-                               style="-fx-background-color: rgba(30, 41, 59, 0.5);
-                                      -fx-control-inner-background: rgba(15, 23, 42, 0.8);
-                                      -fx-background-radius: 15; -fx-table-cell-border-color: rgba(99, 102, 241, 0.1);">
+                    <TableView fx:id="tblProducts" style="-fx-background-color: rgba(30, 41, 59, 0.5);                                       -fx-control-inner-background: rgba(15, 23, 42, 0.8);                                       -fx-background-radius: 15; -fx-table-cell-border-color: rgba(99, 102, 241, 0.1);" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn text="ID" prefWidth="50">
-                                <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
+                            <TableColumn prefWidth="50" text="ID">
+                                <cellValueFactory><PropertyValueFactory property="id" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Name" prefWidth="180">
-                                <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+                            <TableColumn prefWidth="180" text="Name">
+                                <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Category" prefWidth="120">
-                                <cellValueFactory><PropertyValueFactory property="category"/></cellValueFactory>
+                            <TableColumn prefWidth="120" text="Category">
+                                <cellValueFactory><PropertyValueFactory property="category" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Price" prefWidth="100">
-                                <cellValueFactory><PropertyValueFactory property="price"/></cellValueFactory>
+                            <TableColumn prefWidth="100" text="Price">
+                                <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Quantity" prefWidth="90">
-                                <cellValueFactory><PropertyValueFactory property="quantity"/></cellValueFactory>
+                            <TableColumn prefWidth="90" text="Quantity">
+                                <cellValueFactory><PropertyValueFactory property="quantity" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Supplier" prefWidth="140">
-                                <cellValueFactory><PropertyValueFactory property="supplier"/></cellValueFactory>
+                            <TableColumn prefWidth="140" text="Supplier">
+                                <cellValueFactory><PropertyValueFactory property="supplier" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn text="Actions" prefWidth="100">
-                                <cellFactory><javafx.scene.control.cell.PropertyValueFactory property="dummy"/></cellFactory>
+                            <TableColumn prefWidth="100" text="Actions">
+                                <cellFactory><javafx.scene.control.cell.PropertyValueFactory property="dummy" /></cellFactory>
                             </TableColumn>
                         </columns>
                     </TableView>
