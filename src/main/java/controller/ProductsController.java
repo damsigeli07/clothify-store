@@ -6,10 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import service.ProductService;
 
@@ -32,6 +34,7 @@ public class ProductsController {
     @FXML
     public void initialize() {
         setupCategories();
+        setupTableColumns();
         loadProducts();
         setupTableActions();
 
@@ -43,14 +46,61 @@ public class ProductsController {
                     }
                 }
         );
+
+        // Real-time search
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
+            searchProducts(null);
+        });
     }
 
     private void setupCategories() {
         ObservableList<String> categories = FXCollections.observableArrayList(
-                "Men's Clothing", "Women's Clothing", "Kids Clothing",
-                "Accessories", "Footwear", "Sportswear"
+                "Tops", "Bottoms", "Dresses", "Outerwear", "Footwear", "Accessories"
         );
         cmbCategory.setItems(categories);
+    }
+
+    private void setupTableColumns() {
+        // Get columns and set cell value factories
+        TableColumn<ProductDto, Integer> idCol = (TableColumn<ProductDto, Integer>) tblProducts.getColumns().get(0);
+        TableColumn<ProductDto, String> nameCol = (TableColumn<ProductDto, String>) tblProducts.getColumns().get(1);
+        TableColumn<ProductDto, String> categoryCol = (TableColumn<ProductDto, String>) tblProducts.getColumns().get(2);
+        TableColumn<ProductDto, Double> priceCol = (TableColumn<ProductDto, Double>) tblProducts.getColumns().get(3);
+        TableColumn<ProductDto, Integer> quantityCol = (TableColumn<ProductDto, Integer>) tblProducts.getColumns().get(4);
+        TableColumn<ProductDto, String> supplierCol = (TableColumn<ProductDto, String>) tblProducts.getColumns().get(5);
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
+
+        // Format price column with $ symbol
+        priceCol.setCellFactory(col -> new TableCell<ProductDto, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty || price == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", price));
+                }
+            }
+        });
+
+        // Show "-" for null suppliers
+        supplierCol.setCellFactory(col -> new TableCell<ProductDto, String>() {
+            @Override
+            protected void updateItem(String supplier, boolean empty) {
+                super.updateItem(supplier, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(supplier == null || supplier.trim().isEmpty() ? "-" : supplier);
+                }
+            }
+        });
     }
 
     private void loadProducts() {
@@ -65,20 +115,56 @@ public class ProductsController {
                 tblProducts.getColumns().get(6);
 
         actionCol.setCellFactory(param -> new TableCell<>() {
+            private final HBox actionButtons = new HBox(8);
+            private final Button btnEdit = new Button("Edit");
             private final Button btnDelete = new Button("Delete");
 
             {
+                // Style Edit button - Purple gradient
+                btnEdit.setStyle(
+                        "-fx-background-color: linear-gradient(to right, #8B5CF6, #A78BFA); " +
+                                "-fx-text-fill: white; " +
+                                "-fx-background-radius: 6; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-font-size: 12px; " +
+                                "-fx-cursor: hand; " +
+                                "-fx-padding: 6 12 6 12;"
+                );
+
+                btnEdit.setOnAction(event -> {
+                    ProductDto product = getTableView().getItems().get(getIndex());
+                    fillForm(product);
+                    txtName.requestFocus();
+                });
+
+                // Style Delete button - Red gradient
+                btnDelete.setStyle(
+                        "-fx-background-color: linear-gradient(to right, #EF4444, #DC2626); " +
+                                "-fx-text-fill: white; " +
+                                "-fx-background-radius: 6; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-font-size: 12px; " +
+                                "-fx-cursor: hand; " +
+                                "-fx-padding: 6 12 6 12;"
+                );
+
                 btnDelete.setOnAction(event -> {
                     ProductDto product = getTableView().getItems().get(getIndex());
                     deleteProduct(product);
                 });
-                btnDelete.setStyle("-fx-background-color: #F87171; -fx-text-fill: white;");
+
+                actionButtons.setAlignment(Pos.CENTER);
+                actionButtons.getChildren().addAll(btnEdit, btnDelete);
             }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : btnDelete);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(actionButtons);
+                }
             }
         });
     }
@@ -89,7 +175,7 @@ public class ProductsController {
         cmbCategory.setValue(product.getCategory());
         txtPrice.setText(String.valueOf(product.getPrice()));
         txtQuantity.setText(String.valueOf(product.getQuantity()));
-        txtSupplier.setText(product.getSupplier());
+        txtSupplier.setText(product.getSupplier() != null ? product.getSupplier() : "");
         btnSave.setText("Update Product");
     }
 
@@ -104,7 +190,9 @@ public class ProductsController {
         dto.setCategory(cmbCategory.getValue());
         dto.setPrice(Double.parseDouble(txtPrice.getText().trim()));
         dto.setQuantity(Integer.parseInt(txtQuantity.getText().trim()));
-        dto.setSupplier(txtSupplier.getText().trim());
+
+        String supplier = txtSupplier.getText().trim();
+        dto.setSupplier(supplier.isEmpty() ? null : supplier);
 
         try {
             if (selectedProduct == null) {
@@ -127,12 +215,22 @@ public class ProductsController {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirm Delete");
         confirm.setHeaderText(null);
-        confirm.setContentText("Are you sure you want to delete: " + product.getName() + "?");
+        confirm.setContentText("Are you sure you want to delete this product?\n\n" + product.getName());
 
         if (confirm.showAndWait().get() == ButtonType.OK) {
-            productService.deleteProduct(product.getId());
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Product deleted successfully!");
-            loadProducts();
+            try {
+                productService.deleteProduct(product.getId());
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Product deleted successfully!");
+
+                // Clear form if the deleted product was selected
+                if (selectedProduct != null && selectedProduct.getId().equals(product.getId())) {
+                    clearForm(null);
+                }
+
+                loadProducts();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete product: " + e.getMessage());
+            }
         }
     }
 
@@ -168,30 +266,73 @@ public class ProductsController {
 
     private boolean validateInputs() {
         if (txtName.getText().trim().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter product name!");
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter product name");
+            txtName.requestFocus();
             return false;
         }
         if (cmbCategory.getValue() == null) {
-            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please select category!");
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please select a category");
+            cmbCategory.requestFocus();
+            return false;
+        }
+
+        String priceText = txtPrice.getText().trim();
+        if (priceText.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter price");
+            txtPrice.requestFocus();
             return false;
         }
         try {
-            Double.parseDouble(txtPrice.getText().trim());
+            double price = Double.parseDouble(priceText);
+            if (price <= 0) {
+                showAlert(Alert.AlertType.WARNING, "Validation Error", "Price must be greater than 0");
+                txtPrice.requestFocus();
+                return false;
+            }
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter valid price!");
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter a valid price");
+            txtPrice.requestFocus();
+            return false;
+        }
+
+        String qtyText = txtQuantity.getText().trim();
+        if (qtyText.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter quantity");
+            txtQuantity.requestFocus();
             return false;
         }
         try {
-            Integer.parseInt(txtQuantity.getText().trim());
+            int quantity = Integer.parseInt(qtyText);
+            if (quantity < 0) {
+                showAlert(Alert.AlertType.WARNING, "Validation Error", "Quantity cannot be negative");
+                txtQuantity.requestFocus();
+                return false;
+            }
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter valid quantity!");
+            showAlert(Alert.AlertType.WARNING, "Validation Error", "Please enter a valid quantity");
+            txtQuantity.requestFocus();
             return false;
         }
+
         return true;
     }
 
     @FXML
     public void backToDashboard(ActionEvent event) {
+        // Warn about unsaved changes
+        if (!txtName.getText().trim().isEmpty() || cmbCategory.getValue() != null ||
+                !txtPrice.getText().trim().isEmpty() || !txtQuantity.getText().trim().isEmpty()) {
+
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirm");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to go back? Unsaved changes will be lost.");
+
+            if (confirm.showAndWait().get() != ButtonType.OK) {
+                return;
+            }
+        }
+
         try {
             Stage stage = (Stage) txtName.getScene().getWindow();
             stage.close();
@@ -199,12 +340,13 @@ public class ProductsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard_form.fxml"));
             Parent root = loader.load();
             Stage dashboardStage = new Stage();
-            dashboardStage.setTitle("Clothify Store - Dashboard");
+            dashboardStage.setTitle("SATINE - Dashboard");
             dashboardStage.setScene(new Scene(root));
             dashboardStage.setMaximized(true);
             dashboardStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to return to dashboard");
         }
     }
 
