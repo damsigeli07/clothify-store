@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #1A1D29;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductsController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductsController">
 
 
     <children>
@@ -158,7 +158,7 @@
                             <TableColumn prefWidth="140" text="Supplier">
                                 <cellValueFactory><PropertyValueFactory property="supplier" /></cellValueFactory>
                             </TableColumn>
-                            <TableColumn prefWidth="100" text="Actions">
+                            <TableColumn prefWidth="200.0" text="Actions">
                                 <cellFactory><javafx.scene.control.cell.PropertyValueFactory property="dummy" /></cellFactory>
                             </TableColumn>
                         </columns>
