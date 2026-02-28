@@ -33,3 +33,4 @@ public class Employee {
     @Column(nullable = false)
     private Boolean active = true;
 }
+
