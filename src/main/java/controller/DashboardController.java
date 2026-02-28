@@ -97,19 +97,46 @@ public class DashboardController {
     }
 
     @FXML
-    public void openInventory(ActionEvent event) {
-        showAlert("Inventory", "Inventory screen coming soon!");
-    }
-
-    @FXML
     public void openSuppliers(ActionEvent event) {
-        showAlert("Suppliers", "Suppliers screen coming soon!");
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/suppliers_form.fxml"));
+            Parent root = loader.load();
+            Stage suppliersStage = new Stage();
+            suppliersStage.setTitle("Satine - Suppliers");
+            suppliersStage.setScene(new Scene(root));
+            suppliersStage.setMaximized(true);
+            suppliersStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void openEmployees(ActionEvent event) {
-        showAlert("Employees", "Employees screen coming soon!");
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/employees_form.fxml"));
+            Parent root = loader.load();
+            Stage employeesStage = new Stage();
+            employeesStage.setTitle("Satine - Employees");
+            employeesStage.setScene(new Scene(root));
+            employeesStage.setMaximized(true);
+            employeesStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    @FXML
+    public void openInventory(ActionEvent event) {
+        showAlert("Inventory", "Inventory screen coming soon!");
+    }
+
 
     @FXML
     public void openOrders(ActionEvent event) {
