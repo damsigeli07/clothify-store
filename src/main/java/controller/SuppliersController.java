@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import service.SupplierService;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 
@@ -29,6 +30,7 @@ public class SuppliersController {
 
     @FXML
     public void initialize() {
+        setupTableColumns();
         loadSuppliers();
         setupTableActions();
 
@@ -37,6 +39,23 @@ public class SuppliersController {
                     if (newVal != null) fillForm(newVal);
                 }
         );
+    }
+
+    private void setupTableColumns() {
+        TableColumn<SupplierDto, Long> idCol = (TableColumn<SupplierDto, Long>) tblSuppliers.getColumns().get(0);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<SupplierDto, String> nameCol = (TableColumn<SupplierDto, String>) tblSuppliers.getColumns().get(1);
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<SupplierDto, String> emailCol = (TableColumn<SupplierDto, String>) tblSuppliers.getColumns().get(2);
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        TableColumn<SupplierDto, String> phoneCol = (TableColumn<SupplierDto, String>) tblSuppliers.getColumns().get(3);
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+        TableColumn<SupplierDto, String> addressCol = (TableColumn<SupplierDto, String>) tblSuppliers.getColumns().get(4);
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
     private void loadSuppliers() {

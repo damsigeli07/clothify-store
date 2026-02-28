@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuppliersController">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: rgba(30, 41, 59, 0.5);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
+         </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#backToDashboard" style="-fx-background-color: rgba(99, 102, 241, 0.2); -fx-text-fill: #6366F1; -fx-background-radius: 10; -fx-font-weight: bold;" text="← Back">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </Button>
+            <Label style="-fx-font-size: 24; -fx-font-weight: bold;" text="Supplier Management" textFill="#f1f5f9" />
+         </children>
+        </HBox>
+
+        <!-- Main Content -->
+        <HBox spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="380.0" spacing="18.0" style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-background-radius: 20; -fx-padding: 30;">
+               <children>
+                  <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Supplier Details" textFill="#f1f5f9" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Label style="-fx-font-size: 11; -fx-font-weight: bold;" text="SUPPLIER NAME *" textFill="#94a3b8" />
+                        <TextField fx:id="txtName" promptText="Enter supplier name" style="-fx-background-color: rgba(15, 23, 42, 0.8); -fx-text-fill: white; -fx-prompt-text-fill: #64748B; -fx-background-radius: 10;                          -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 10;                          -fx-border-width: 1.5;">
+                           <padding>
+                              <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                           </padding></TextField>
+                     </children>
+                  </VBox>
+                   <!-- Email -->
+                   <VBox spacing="8.0">
+                       <children>
+                           <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="EMAIL" textFill="#94A3B8" />
+                           <TextField fx:id="txtEmail" promptText="supplier@example.com" style="-fx-background-color: rgba(15, 23, 42, 0.8); -fx-text-fill: white;                                               -fx-prompt-text-fill: #64748B; -fx-background-radius: 10;                                               -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 10;                                               -fx-border-width: 1.5;">
+                               <padding>
+                                   <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                               </padding>
+                           </TextField>
+                       </children>
+                   </VBox>
+                   <!-- Phone -->
+                   <VBox spacing="8.0">
+                       <children>
+                           <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="PHONE *" textFill="#94A3B8" />
+                           <TextField fx:id="txtPhone" promptText="Enter phone number" style="-fx-background-color: rgba(15, 23, 42, 0.8); -fx-text-fill: white;                                               -fx-prompt-text-fill: #64748B; -fx-background-radius: 10;                                               -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 10;                                               -fx-border-width: 1.5;">
+                               <padding>
+                                   <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                               </padding>
+                           </TextField>
+                       </children>
+                   </VBox>
+                   <!-- Address -->
+                   <VBox spacing="8.0">
+                       <children>
+                           <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" text="ADDRESS" textFill="#94A3B8" />
+                        <TextArea fx:id="txtAddress" prefHeight="200.0" prefRowCount="2" prefWidth="200.0" promptText="Enter address" style="-fx-background-color: rgba(15, 23, 42, 0.8); -fx-text-fill: white; -fx-prompt-text-fill: #64748B; -fx-background-radius: 10; -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 10; -fx-border-width: 1.5; -fx-control-inner-background: rgba(15, 23, 42, 0.8);" wrapText="true">
+                           <padding>
+                              <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                           </padding></TextArea>
+
+                       </children>
+                   </VBox>
+
+                   <!-- Buttons -->
+                   <HBox spacing="12.0">
+                       <children>
+                           <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#clearForm" style="-fx-background-color: rgba(239, 68, 68, 0.2); -fx-text-fill: #EF4444;                                            -fx-background-radius: 10; -fx-font-weight: bold;" text="Clear" HBox.hgrow="ALWAYS">
+                               <padding>
+                                   <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+                               </padding>
+                           </Button>
+                           <Button fx:id="btnSave" maxWidth="Infinity" mnemonicParsing="false" onAction="#saveSupplier" style="-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6);                                            -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Add Supplier" HBox.hgrow="ALWAYS">
+                               <padding>
+                                   <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+                               </padding>
+                           </Button>
+                       </children>
+                   </HBox>
+               </children>
+            </VBox>
+
+            <!-- Right Panel - Table -->
+            <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                <children>
+                    <!-- Search -->
+                    <HBox spacing="15.0">
+                        <children>
+                            <TextField fx:id="txtSearch" promptText="Search suppliers..." style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-text-fill: white;                                               -fx-prompt-text-fill: #64748B; -fx-background-radius: 12;                                               -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 12;                                               -fx-border-width: 1.5; -fx-font-size: 14px;" HBox.hgrow="ALWAYS">
+                                <padding>
+                                    <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+                                </padding>
+                            </TextField>
+                            <Button mnemonicParsing="false" onAction="#searchSuppliers" style="-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6);                                            -fx-text-fill: white; -fx-background-radius: 12; -fx-font-weight: bold;" text="Search">
+                                <padding>
+                                    <Insets bottom="12.0" left="25.0" right="25.0" top="12.0" />
+                                </padding>
+                            </Button>
+                        </children>
+                    </HBox>
+                  <TableView fx:id="tblSuppliers" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-control-inner-background: rgba(15, 23, 42, 0.8);                                       -fx-background-radius: 15; -fx-table-cell-border-color: rgba(99, 102, 241, 0.1);" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn prefWidth="50.0" text="ID" />
+                      <TableColumn prefWidth="200.0" text="Name" />
+                        <TableColumn prefWidth="180.0" text="Email" />
+                        <TableColumn prefWidth="130.0" text="Phone" />
+                        <TableColumn prefWidth="200.0" text="Address" />
+                        <TableColumn prefWidth="100.0" text="Actions" />
+                    </columns>
+                  </TableView>
+                </children>
+            </VBox>
+         </children>
+        </HBox>
+    </children>
+</AnchorPane>
