@@ -29,5 +29,10 @@
         <mapping class="entity.User"/>
         <mapping class="entity.Product"/>
         <mapping class="entity.Order"/>
+        <mapping class="entity.User"/>
+        <mapping class="entity.Product"/>
+        <mapping class="entity.Order"/>
+        <mapping class="entity.Supplier"/>
+        <mapping class="entity.Employee"/>
     </session-factory>
 </hibernate-configuration>
