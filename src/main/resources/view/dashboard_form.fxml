@@ -63,11 +63,6 @@
                         <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
                     </padding>
                 </Button>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openOrders" style="-fx-background-color: transparent; -fx-text-fill: #94A3B8; -fx-font-size: 14PX; -fx-background-radius: 8;" text="Orders">
-                    <padding>
-                        <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                    </padding>
-                </Button>
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openReports" style="-fx-background-color: transparent; -fx-text-fill: #94A3B8; -fx-font-size: 14PX; -fx-background-radius: 8;" text="Reports">
                     <padding>
                         <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
