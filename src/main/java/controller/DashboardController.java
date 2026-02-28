@@ -134,7 +134,20 @@ public class DashboardController {
 
     @FXML
     public void openInventory(ActionEvent event) {
-        showAlert("Inventory", "Inventory screen coming soon!");
+        try {
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/inventory_form.fxml"));
+            Parent root = loader.load();
+            Stage inventoryStage = new Stage();
+            inventoryStage.setTitle("Satine - Inventory");
+            inventoryStage.setScene(new Scene(root));
+            inventoryStage.setMaximized(true);
+            inventoryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
