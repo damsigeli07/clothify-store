@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InventoryController">
+
+    <children>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="20.0" style="-fx-background-color: rgba(30, 41, 59, 0.5);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
+            </padding>
+            <children>
+                <Button mnemonicParsing="false" onAction="#backToDashboard" style="-fx-background-color: rgba(99, 102, 241, 0.2); -fx-text-fill: #6366F1;                                -fx-background-radius: 10; -fx-font-weight: bold;" text="← Back">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </Button>
+                <Label style="-fx-font-weight: bold; -fx-font-size: 24;" text="Inventory Management" textFill="#F1F5F9" />
+            </children>
+        </HBox>
+
+        <!-- Main Content -->
+        <VBox spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+
+            <!-- Stats Cards -->
+            <HBox spacing="20.0">
+                <children>
+                    <VBox prefHeight="120.0" spacing="12.0" style="-fx-background-color: rgba(99, 102, 241, 0.15);                                  -fx-background-radius: 15; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label style="-fx-font-size: 13px;" text="Total Products" textFill="#94A3B8" />
+                            <Label id="lblTotalProducts" style="-fx-font-size: 28; -fx-font-weight: bold;" text="0" textFill="#6366F1" />
+                            <Label style="-fx-font-size: 11px;" text="In Stock" textFill="#94A3B8" />
+                        </children>
+                    </VBox>
+                    <VBox prefHeight="120.0" spacing="12.0" style="-fx-background-color: rgba(239, 68, 68, 0.15);                                  -fx-background-radius: 15; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label style="-fx-font-size: 13px;" text="Low Stock Items" textFill="#94A3B8" />
+                            <Label id="lblLowStock" style="-fx-font-size: 28; -fx-font-weight: bold;" text="0" textFill="#EF4444" />
+                            <Label style="-fx-font-size: 11px;" text="Below 10 units" textFill="#f87171" />
+                        </children>
+                    </VBox>
+               <VBox prefHeight="120.0" spacing="12.0" style="-fx-background-color: rgba(16, 185, 129, 0.15); -fx-background-radius: 15; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label id="lblStockValue" style="-fx-font-size: 13px;" text="Total Stock Value" textFill="#94A3B8" />
+                     <Label id="lblStockValue" style="-fx-font-size: 28; -fx-font-weight: bold;" text="\$0.00" textFill="#10b981" />
+                     <Label style="-fx-font-size: 11px;" text="Inventory Worth" textFill="#94a3b8" />
+                  </children>
+               </VBox>
+               <VBox prefHeight="120.0" spacing="12.0" style="-fx-background-color: rgba(139, 92, 246, 0.15); -fx-background-radius: 15; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label style="-fx-font-size: 13px;" text="Out of Stock" textFill="#94A3B8" />
+                     <Label id="lblOutOfStock" style="-fx-font-size: 28; -fx-font-weight: bold;" text="0" textFill="#8b5cf6" />
+                     <Label style="-fx-font-size: 11px;" text="Items" textFill="#94a3b8" />
+                  </children>
+               </VBox>
+
+                </children>
+            </HBox>
+            <!-- Filters and Search -->
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <children>
+                    <Label text="Filter:" textFill="#94A3B8" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <ComboBox id="cmbFilter" onAction="#filterInventory" prefWidth="150.0"
+                              style="-fx-background-color: rgba(15, 23, 42, 0.8);
+                                     -fx-background-radius: 8;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <TextField id="txtSearch" promptText="Search products..."
+                               style="-fx-background-color: rgba(30, 41, 59, 0.5); -fx-text-fill: white;
+                                      -fx-prompt-text-fill: #64748B; -fx-background-radius: 12;
+                                      -fx-border-color: rgba(99, 102, 241, 0.3); -fx-border-radius: 12;
+                                      -fx-border-width: 1.5; -fx-font-size: 14px;"
+                               prefWidth="300.0">
+                        <padding>
+                            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                        </padding>
+                    </TextField>
+                    <Button mnemonicParsing="false" onAction="#searchInventory"
+                            style="-fx-background-color: linear-gradient(to right, #6366F1, #8B5CF6);
+                                   -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;"
+                            text="Search">
+                        <padding>
+                            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                        </padding>
+                    </Button>
+                </children>
+            </HBox>
+
+        </VBox>
+    </children>
+
+</AnchorPane>
