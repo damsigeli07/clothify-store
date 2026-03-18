@@ -30,6 +30,7 @@ public class EmployeesController {
 
     @FXML
     public void initialize() {
+        setupTableColumns(); // ADD THIS
         loadEmployees();
         setupTableActions();
 
@@ -38,6 +39,45 @@ public class EmployeesController {
                     if (newVal != null) fillForm(newVal);
                 }
         );
+    }
+
+    private void setupTableColumns() {
+        TableColumn<EmployeeDto, Long> idCol = (TableColumn<EmployeeDto, Long>)
+                tblEmployees.getColumns().get(0);
+        idCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("id"));
+
+        TableColumn<EmployeeDto, String> nameCol = (TableColumn<EmployeeDto, String>)
+                tblEmployees.getColumns().get(1);
+        nameCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("name"));
+
+        TableColumn<EmployeeDto, String> positionCol = (TableColumn<EmployeeDto, String>)
+                tblEmployees.getColumns().get(2);
+        positionCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("position"));
+
+        TableColumn<EmployeeDto, String> emailCol = (TableColumn<EmployeeDto, String>)
+                tblEmployees.getColumns().get(3);
+        emailCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("email"));
+
+        TableColumn<EmployeeDto, String> phoneCol = (TableColumn<EmployeeDto, String>)
+                tblEmployees.getColumns().get(4);
+        phoneCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("phone"));
+
+        TableColumn<EmployeeDto, Double> salaryCol = (TableColumn<EmployeeDto, Double>)
+                tblEmployees.getColumns().get(5);
+        salaryCol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("salary"));
+
+        // Format salary with $ symbol
+        salaryCol.setCellFactory(col -> new TableCell<EmployeeDto, Double>() {
+            @Override
+            protected void updateItem(Double salary, boolean empty) {
+                super.updateItem(salary, empty);
+                if (empty || salary == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", salary));
+                }
+            }
+        });
     }
 
     private void loadEmployees() {

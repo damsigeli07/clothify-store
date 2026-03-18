@@ -9,7 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import entity.User;
-
+import service.OrderService;
+import service.ProductService;
 import java.io.IOException;
 
 public class DashboardController {
@@ -21,6 +22,9 @@ public class DashboardController {
     @FXML private Label lblTotalOrders;
 
     private User currentUser;
+
+    private final OrderService orderService = new OrderService();
+    private final ProductService productService = new ProductService();
 
     @FXML
     public void initialize() {
@@ -35,11 +39,29 @@ public class DashboardController {
     }
 
     private void loadDashboardData() {
-        // TODO: Load from database
-        if (lblTotalSales != null) lblTotalSales.setText("$2,450.00");
-        if (lblProductsSold != null) lblProductsSold.setText("156");
-        if (lblLowStock != null) lblLowStock.setText("8");
-        if (lblTotalOrders != null) lblTotalOrders.setText("42");
+        // Total Sales Today
+        if (lblTotalSales != null) {
+            Double todaySales = orderService.getTodayTotalSales();
+            lblTotalSales.setText(String.format("$%.2f", todaySales != null ? todaySales : 0.0));
+        }
+
+        // Total Products in Inventory
+        if (lblProductsSold != null) {
+            int totalProducts = productService.getAllProducts().size();
+            lblProductsSold.setText(String.valueOf(totalProducts));
+        }
+
+        // Low Stock Items (below 10 units)
+        if (lblLowStock != null) {
+            int lowStock = productService.getLowStockProducts().size();
+            lblLowStock.setText(String.valueOf(lowStock));
+        }
+
+        // Today's Orders
+        if (lblTotalOrders != null) {
+            int todayOrders = orderService.getTodayOrders().size();
+            lblTotalOrders.setText(String.valueOf(todayOrders));
+        }
     }
 
     @FXML
