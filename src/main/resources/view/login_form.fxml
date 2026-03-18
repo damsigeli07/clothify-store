@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
@@ -23,29 +22,28 @@
             <!-- Animated Circles Background -->
             <AnchorPane prefHeight="700.0" prefWidth="1000.0">
                 <children>
-                    <ImageView fitHeight="750.0" fitWidth="553.0" layoutX="30.4" pickOnBounds="true" style="-fx-fit-height: 750; -fx-fit-width: 520;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <ImageView fitHeight="700.0" fitWidth="500.0" layoutX="30.4" pickOnBounds="true" style="-fx-fit-height: 750; -fx-fit-width: 520;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="0.0">
 
 
                <image>
                    <Image url="@../img/login-bg-2.jpg" />
                </image>
            </ImageView>
-                    <!-- Circle 1 -->
-                    <Circle centerX="100" centerY="150" fill="radial-gradient(center 50% 50%, radius 100%, rgba(99,102,241,0.1), transparent)" radius="200" />
-                    <!-- Circle 2 -->
-                    <Circle centerX="900" centerY="500" fill="radial-gradient(center 50% 50%, radius 100%, rgba(139,92,246,0.1), transparent)" radius="250" />
+                    <!-- Gradient Overlay on Image Side -->
+                    <AnchorPane style="-fx-background-color: linear-gradient(to right, transparent, rgba(15, 23, 42, 0.8));" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="0.0" />
+
 
                 <!-- Main Content -->
-                <HBox alignment="CENTER" layoutY="94.4" prefHeight="551.0" prefWidth="954.0" spacing="50" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="94.0">
+                <HBox alignment="CENTER" layoutX="108.0" layoutY="94.4" prefHeight="590.0" prefWidth="832.0" spacing="50" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="80.0">
 
                 <!-- Left Side - Branding -->
-                <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="423.0" spacing="2.0" style="-fx-background-size: 16;">
+                <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="451.0" spacing="2.0" style="-fx-background-size: 16;">
                 <children>
                         <Label prefHeight="70.0" prefWidth="231.0" style="-fx-font-size: 48; -fx-font-weight: bold; -fx-line-spacing: 5;" text="SATINE" textFill="#d1d2ff" />
                     <!-- Logo/Icon Placeholder -->
                     <VBox alignment="TOP_CENTER" spacing="5.0">
                            <children>
-                              <Label prefHeight="22.0" prefWidth="246.0" text="Store Management System" textFill="#222a33">
+                              <Label prefHeight="22.0" prefWidth="246.0" style="-fx-font-weight: bold;" text="Store Management System" textFill="#222a33">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
